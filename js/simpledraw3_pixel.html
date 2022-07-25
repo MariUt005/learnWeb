@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Simple draw</title>
+    <style>
+        * {box-sizing: border-box;}
+        body {
+            height: 200px;
+            background: beige;
+        }
+        .pixel {
+            height: 15px;
+            width: 15px;
+            display: flex;
+
+        }
+        .colors {
+            display: flex;
+            flex-direction: row;
+        }
+        .color {
+            height: 50px;
+            width: 50px;
+        }
+        #red {background: red;}
+        #green {background: green;}
+        #blue {background: blue;}
+        #img {
+            height: 495px;
+            width: 750px;
+            margin: auto;
+            background: white;
+            display: flex;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="colors">
+        <div id="red" class="color"></div>
+        <div id="green" class="color"></div>
+        <div id="blue" class="color"></div>
+    </div>
+    <div id="img"></div>
+    <script>
+        let img = document.getElementById("img");
+        for (let i = 0; i < img.clientWidth; i += 15) {
+            for (let j = 0; j < img.clientHeight; j += 15) {
+                let pixel = document.createElement("div");
+                pixel.className = "pixel";
+                pixel.style.border = "1px solid #777777";
+                img.appendChild(pixel);
+            }
+        }
+        let pixelColor = "blue";
+        let red = document.getElementById("red");
+        red.addEventListener("click", event => {
+            console.log("red");
+            pixelColor = "red";
+            event.stopPropagation();
+        });
+        let green = document.getElementById("green");
+        green.addEventListener("click", event => {
+            console.log("green");
+            pixelColor = "green";
+            event.stopPropagation();
+        });
+        let blue = document.getElementById("blue");
+        blue.addEventListener("click", event => {
+            console.log("blue");
+            pixelColor = "blue";
+            event.stopPropagation();
+        });
+        window.addEventListener("click", event => {
+            console.log(event.target.className)
+            if (event.target.className == "pixel") {
+                event.target.style.background = pixelColor;
+            }
+        });
+    </script>
+</body>
+</html>
